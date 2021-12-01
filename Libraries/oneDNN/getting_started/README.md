@@ -95,19 +95,22 @@ Open "Intel oneAPI command prompt for Intel 64 for Visual Studio 2017" or
 "Intel oneAPI command prompt for Intel 64 for Visual Studio 2019" and perform the following steps:
 1. Setup oneAPI development environment
 ```
-C:\Program Files (x86)\intel\oneapi\setvars.bat
+C:\Program Files (x86)\Intel\oneAPI\setvars.bat
 ```
 2. Build the program using `cmake`
 ```
+cd C:\Program Files (x86)\Intel\oneAPI\dnnl\latest\cpu_dpcpp_gpu_dpcpp\examples\
 mkdir build
 cd build
-cmake -G Ninja ..
+set CC=clang
+set CXX=clang++
+cmake -G Ninja .. -DDNNL_CPU_RUNTIME=DPCPP -DDNNL_GPU_RUNTIME=DPCPP
 cmake --build .
 ```
 
 3. Run the program
 ```
-bin\getting-started-cpp.exe
+getting-started-cpp.exe
 ```
 
 ### Include Files
@@ -149,7 +152,6 @@ Example passed on CPU.
 
 When executed with `DNNL_VERBOSE=1`:
 ```
-dnnl_verbose,info,oneDNN v1.95.0 (commit ae08a30fff7f76759fd4c5093c01707d0ee12c4c)
 dnnl_verbose,info,cpu,runtime:DPC++
 dnnl_verbose,info,cpu,isa:Intel AVX2
 dnnl_verbose,info,gpu,runtime:DPC++
